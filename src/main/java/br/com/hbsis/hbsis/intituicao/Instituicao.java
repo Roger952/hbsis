@@ -1,27 +1,18 @@
 package br.com.hbsis.hbsis.intituicao;
 
-import javax.persistence.*;
+import br.com.hbsis.hbsis.utils.AbstractEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity(name = "instituicao")
-public class Instituicao {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Instituicao extends AbstractEntity {
 
     @Column(name = "name_intituicao", length = 100, nullable = false)
     private String nameInstituicao;
 
     @Column(name = "type_intituicao", length = 100, nullable = false)
     private String typeInstituicao;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNameInstituicao() {
         return nameInstituicao;
@@ -42,7 +33,6 @@ public class Instituicao {
     @Override
     public String toString() {
         return "Instituicao{" +
-                "id=" + id +
                 ", nameInstituicao='" + nameInstituicao + '\'' +
                 ", typeInstituicao='" + typeInstituicao + '\'' +
                 '}';
