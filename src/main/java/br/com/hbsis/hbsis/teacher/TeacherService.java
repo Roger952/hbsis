@@ -70,7 +70,10 @@ public class TeacherService {
         if (iTeacherRepository.existsByCpf(teacherDTO.getCpf())) {
             throw new IllegalArgumentException("Já existe outro professor cadastrado com este cpf");
         }
-        if (teacherDTO.getTelephone().matches("(\\(\\d{2}\\)\\s)(\\d{4,5}-\\d{4})")){
+        if (iTeacherRepository.existsByEmail(teacherDTO.getEmail())) {
+            throw new IllegalArgumentException("Já existe um professor cadastrado com este email");
+        }
+        if (teacherDTO.getTelephone().matches("(\\(\\d{2}\\)\\s)(\\d{4,5}-\\d{4})")) {
             teacherDTO.setTelephone(teacherDTO.getTelephone().replaceAll("[^0-9]", ""));
         }
     }
