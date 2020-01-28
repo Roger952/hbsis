@@ -1,31 +1,44 @@
 package br.com.hbsis.hbsis.teacher;
 
+import br.com.hbsis.hbsis.annotations.ContactNumberConstraint;
+import br.com.hbsis.hbsis.annotations.ValidSex;
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class TeacherDTO {
 
     private Long id;
+
     @NotNull(message = "Informe a instituição que este professor pertence")
     private Long idInstituicao;
+
     @NotNull(message = "O nome do professor não pode estar nulo")
     @Size(min = 1, max = 100, message = "Numero de caracteres não suportado")
     private String nameTeacher;
-    @NotNull(message = "Informe o sexo do professor")
+
+    @ValidSex(message = "Sexo com o formato errado")
     @Size(min = 1, max = 10, message = "Numero de caracteres não suportado")
     private String sex;
+
     @NotNull(message = "Informe a idade do professor")
     private Integer age;
-    @Size(min = 1, max = 11, message = "Numero de caracteres não suportado")
+
+    @ContactNumberConstraint(message = "Numero inserido não valido")
+    @Size(min = 8, max = 15, message = "Numero de caracteres não suportado")
     private String telephone;
+
     @Size(min = 1, max = 200, message = "Numero de caracteres não suportado")
     private String address;
+
     @NotNull(message = "Informe o email do professor")
+    @Email(message = "Email com padrao incorreto")
     @Size(min = 1, max = 250, message = "Numero de caracteres não suportado")
     private String email;
-    @CPF
+
+    @CPF(message = "cpf invalido")
     @NotNull(message = "Informe o cpf do professor")
     @Size(min = 1, max = 14, message = "Numero de caracters não suportado")
     private String cpf;
@@ -33,14 +46,7 @@ public class TeacherDTO {
     public TeacherDTO() {
     }
 
-    public TeacherDTO(Long id,
-                      @NotNull(message = "Informe a instituição que este professor pertence") Long idInstituicao,
-                      @NotNull(message = "O nome do professor não pode estar nulo") @Size(min = 1, max = 100, message = "Numero de caracteres não suportado") String nameTeacher,
-                      @NotNull(message = "Informe o sexo do professor") @Size(min = 1, max = 10, message = "Numero de caracteres não suportado") String sex,
-                      @NotNull(message = "Informe a idade do professor") Integer age, @Size(min = 1, max = 11, message = "Numero de caracteres não suportado") String telephone,
-                      @Size(min = 1, max = 200, message = "Numero de caracteres não suportado") String address,
-                      @NotNull(message = "Informe o email do professor") @Size(min = 1, max = 250, message = "Numero de caracteres não suportado") String email,
-                      @CPF @NotNull(message = "Informe o cpf do professor") @Size(min = 1, max = 14, message = "Numero de caracters não suportado") String cpf) {
+    public TeacherDTO(Long id, Long idInstituicao, String nameTeacher, String sex, Integer age, String telephone, String address, String email, String cpf) {
         this.id = id;
         this.idInstituicao = idInstituicao;
         this.nameTeacher = nameTeacher;

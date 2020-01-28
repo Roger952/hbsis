@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 @Entity(name = "instituicao")
 public class Instituicao extends AbstractEntity {
 
-    @Column(name = "name_intituicao", length = 100, nullable = false)
+    @Column(name = "name_instituicao", length = 100, nullable = false)
     private String nameInstituicao;
 
-    @Column(name = "type_intituicao", length = 100, nullable = false)
+    @Column(name = "type_instituicao", length = 100, nullable = false)
     private String typeInstituicao;
 
     public String getNameInstituicao() {
