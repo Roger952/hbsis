@@ -1,8 +1,8 @@
-package br.com.hbsis.hbsis.student;
+package br.com.hbsis.hbsis.turma_materias;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IStudentRepository extends JpaRepository<Student, Long> {
+public interface ITurmaMaterias extends JpaRepository<TurmaMaterias, Long> {
 }
