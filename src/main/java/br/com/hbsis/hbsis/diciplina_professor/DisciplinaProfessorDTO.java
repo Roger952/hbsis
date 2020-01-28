@@ -1,7 +1,5 @@
 package br.com.hbsis.hbsis.diciplina_professor;
 
-import javax.validation.constraints.NotNull;
-
 public class DisciplinaProfessorDTO {
 
     private Long id;

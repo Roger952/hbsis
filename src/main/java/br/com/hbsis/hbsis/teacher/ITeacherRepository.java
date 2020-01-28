@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 interface ITeacherRepository extends JpaRepository<Teacher, Long> {
     boolean existsByCpf(String cpf);
-    boolean existsByEmail (String email);
+
+    boolean existsByEmail(String email);
 }

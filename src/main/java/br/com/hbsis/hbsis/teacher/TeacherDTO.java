@@ -3,11 +3,14 @@ package br.com.hbsis.hbsis.teacher;
 import br.com.hbsis.hbsis.annotations.AgeOfTeacherValidate;
 import br.com.hbsis.hbsis.annotations.ContactNumberConstraint;
 import br.com.hbsis.hbsis.annotations.ValidSex;
+import br.com.hbsis.hbsis.diciplina_professor.DisciplinaProfessorDTO;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TeacherDTO {
 
@@ -45,10 +48,12 @@ public class TeacherDTO {
     @Size(min = 1, max = 14, message = "Numero de caracters não suportado")
     private String cpf;
 
+    private List<DisciplinaProfessorDTO> disciplinaProfessor;
+
     public TeacherDTO() {
     }
 
-    public TeacherDTO(Long id, Long idInstituicao, String nameTeacher, String sex, Integer age, String telephone, String address, String email, String cpf) {
+    public TeacherDTO(Long id, Long idInstituicao, String nameTeacher, String sex, Integer age, String telephone, String address, String email, String cpf, List<DisciplinaProfessorDTO> disciplinaProfessor) {
         this.id = id;
         this.idInstituicao = idInstituicao;
         this.nameTeacher = nameTeacher;
@@ -58,9 +63,13 @@ public class TeacherDTO {
         this.address = address;
         this.email = email;
         this.cpf = cpf;
+        this.disciplinaProfessor = disciplinaProfessor;
     }
 
     public static TeacherDTO of(Teacher teacher) {
+        List<DisciplinaProfessorDTO> disciplinaDTOS = new ArrayList<>();
+
+        teacher.getDisciplinas().forEach(disciplinaProfessor -> disciplinaDTOS.add(DisciplinaProfessorDTO.of(disciplinaProfessor)));
         return new TeacherDTO(
                 teacher.getId(),
                 teacher.getInstituicao().getId(),
@@ -70,7 +79,8 @@ public class TeacherDTO {
                 teacher.getTelephone(),
                 teacher.getAddress(),
                 teacher.getEmail(),
-                teacher.getCpf()
+                teacher.getCpf(),
+                disciplinaDTOS
         );
     }
 
@@ -144,5 +154,29 @@ public class TeacherDTO {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public List<DisciplinaProfessorDTO> getDisciplinaProfessor() {
+        return disciplinaProfessor;
+    }
+
+    public void setDisciplinaProfessor(List<DisciplinaProfessorDTO> disciplinaProfessor) {
+        this.disciplinaProfessor = disciplinaProfessor;
+    }
+
+    @Override
+    public String toString() {
+        return "TeacherDTO{" +
+                "id=" + id +
+                ", idInstituicao=" + idInstituicao +
+                ", nameTeacher='" + nameTeacher + '\'' +
+                ", sex='" + sex + '\'' +
+                ", age=" + age +
+                ", telephone='" + telephone + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", disciplinaProfessor=" + disciplinaProfessor +
+                '}';
     }
 }

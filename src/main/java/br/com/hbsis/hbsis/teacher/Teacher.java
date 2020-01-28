@@ -1,12 +1,11 @@
 package br.com.hbsis.hbsis.teacher;
 
+import br.com.hbsis.hbsis.diciplina_professor.DisciplinaProfessor;
 import br.com.hbsis.hbsis.intituicao.Instituicao;
 import br.com.hbsis.hbsis.utils.AbstractEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "professor")
 public class Teacher extends AbstractEntity {
@@ -35,6 +34,9 @@ public class Teacher extends AbstractEntity {
 
     @Column(name = "cpf", length = 14, nullable = false, unique = true)
     private String cpf;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<DisciplinaProfessor> disciplinas;
 
     public Instituicao getInstituicao() {
         return instituicao;
@@ -100,6 +102,14 @@ public class Teacher extends AbstractEntity {
         this.cpf = cpf;
     }
 
+    public List<DisciplinaProfessor> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<DisciplinaProfessor> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +
@@ -111,6 +121,7 @@ public class Teacher extends AbstractEntity {
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
                 ", cpf='" + cpf + '\'' +
+                ", disciplinas=" + disciplinas +
                 '}';
     }
 }

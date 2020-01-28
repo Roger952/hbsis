@@ -2,10 +2,7 @@ package br.com.hbsis.hbsis.teacher;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,5 +22,19 @@ public class TeacherRest {
         teacherDTO = teacherService.save(teacherDTO);
 
         return new ResponseEntity<>(teacherDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<TeacherDTO> findById(@PathVariable("id") Long id) {
+
+        TeacherDTO teacherDTO = teacherService.findByIdTeacherDTO(id);
+
+        return new ResponseEntity<>(teacherDTO, HttpStatus.OK);
+    }
+
+    @PutMapping(path = "{id}")
+    public ResponseEntity<TeacherDTO> update(@PathVariable(name = "id") Long id, @RequestBody TeacherDTO teacherDTO) {
+        teacherService.update(teacherDTO, id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
