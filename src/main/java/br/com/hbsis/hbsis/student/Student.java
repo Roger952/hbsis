@@ -1,9 +1,12 @@
 package br.com.hbsis.hbsis.student;
 
+import br.com.hbsis.hbsis.turmas.Turma;
 import br.com.hbsis.hbsis.utils.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity(name = "estudante")
 public class Student extends AbstractEntity {
@@ -31,6 +34,11 @@ public class Student extends AbstractEntity {
 
     @Column(name = "cpf", length = 14, nullable = false, unique = true)
     private String cpf;
+
+    @ManyToOne
+    @JoinColumn(name = "id_turma", nullable = false, referencedColumnName = "id")
+    private Turma turma;
+
 
     public String getNameStudent() {
         return nameStudent;
@@ -96,6 +104,14 @@ public class Student extends AbstractEntity {
         this.cpf = cpf;
     }
 
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -107,6 +123,7 @@ public class Student extends AbstractEntity {
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
                 ", cpf='" + cpf + '\'' +
+                ", turma=" + turma +
                 '}';
     }
 }

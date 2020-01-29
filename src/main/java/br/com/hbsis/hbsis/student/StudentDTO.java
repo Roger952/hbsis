@@ -32,11 +32,13 @@ public class StudentDTO {
     @NotNull(message = "Informe o cpf do Aluno")
     @Size(min = 1, max = 14, message = "Numero de caracters não suportado")
     private String cpf;
+    @NotNull
+    private Long idTurma;
 
     public StudentDTO() {
     }
 
-    public StudentDTO(Long id, String nameStudent, String registration, String sex, Integer age, String telephone, String address, String email, String cpf) {
+    public StudentDTO(Long id, String nameStudent, String registration, String sex, Integer age, String telephone, String address, String email, String cpf, Long idTurma) {
         this.id = id;
         this.nameStudent = nameStudent;
         this.registration = registration;
@@ -46,6 +48,7 @@ public class StudentDTO {
         this.address = address;
         this.email = email;
         this.cpf = cpf;
+        this.idTurma = idTurma;
     }
 
     public static StudentDTO of(Student student) {
@@ -58,7 +61,8 @@ public class StudentDTO {
                 student.getTelephone(),
                 student.getAddress(),
                 student.getEmail(),
-                student.getCpf()
+                student.getCpf(),
+                student.getTurma().getId()
         );
     }
 
