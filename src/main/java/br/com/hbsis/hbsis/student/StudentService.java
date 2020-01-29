@@ -59,5 +59,8 @@ public class StudentService {
         if (iStudentRepository.existsByRegistration(studentDTO.getRegistration())){
             throw new IllegalArgumentException("Já existe um aluno cadastrado com esta matricula");
         }
+        if (studentDTO.getTelephone().matches("(\\(\\d{2}\\)\\s)(\\d{4,5}-\\d{4})")){
+            studentDTO.setTelephone(studentDTO.getTelephone().replaceAll("[^0-9]", ""));
+        }
     }
 }

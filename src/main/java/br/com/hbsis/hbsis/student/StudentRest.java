@@ -2,10 +2,9 @@ package br.com.hbsis.hbsis.student;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("student")
@@ -19,7 +18,7 @@ public class StudentRest {
     }
 
     @PostMapping
-    public StudentDTO save(@RequestParam StudentDTO studentDTO){
+    public StudentDTO save(@Valid @RequestBody StudentDTO studentDTO){
 
         LOGGER.info("Enviando requisição para salvar o estudante inserido");
 

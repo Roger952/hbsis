@@ -1,6 +1,6 @@
 package br.com.hbsis.hbsis.student;
 
-import br.com.hbsis.hbsis.annotations.AgeOfTeacherValidate;
+import br.com.hbsis.hbsis.annotations.AgeOfStudentValidate;
 import br.com.hbsis.hbsis.annotations.ContactNumberConstraint;
 import br.com.hbsis.hbsis.annotations.ValidSex;
 import org.hibernate.validator.constraints.br.CPF;
@@ -12,31 +12,41 @@ import javax.validation.constraints.Size;
 public class StudentDTO {
 
     private Long id;
+
     @NotNull(message = "O nome do Estudante não pode estar nulo")
     @Size(min = 1, max = 100, message = "Numero de caracteres não suportado")
     private String nameStudent;
+
     @NotNull(message = "A matricula não pode estar nula")
     @Size(min = 1, max = 100, message = "Numero de caracteres não suportado")
     private String registration;
+
     @NotNull(message = "Informe o sexo do estudante")
     @Size(min = 1, max = 10, message = "Numero de caracteres não suportado")
-    @ValidSex
+    @ValidSex(message = "formato do sexo não esperado")
     private String sex;
+
     @NotNull(message = "Informe a idade do estudante")
+    @AgeOfStudentValidate
     private Integer age;
-    @Size(min = 1, max = 11, message = "Numero de caracteres não suportado")
+
+    @Size(min = 1, max = 20, message = "Numero de caracteres não suportado")
     @ContactNumberConstraint
     private String telephone;
+
     @Size(min = 1, max = 200, message = "Numero de caracteres não suportado")
     private String address;
+
     @NotNull(message = "Informe o email do estudante")
     @Size(min = 1, max = 250, message = "Numero de caracteres não suportado")
     @Email(message = "email com formato invalido")
     private String email;
-    @CPF
+
     @NotNull(message = "Informe o cpf do Aluno")
     @Size(min = 1, max = 14, message = "Numero de caracters não suportado")
+    @CPF(message = "formato do cpf esta errado")
     private String cpf;
+
     @NotNull
     private Long idTurma;
 
