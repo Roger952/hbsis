@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity(name = "atividade")
 public class Atividade extends AbstractEntity {
@@ -99,5 +100,25 @@ public class Atividade extends AbstractEntity {
                 ", turma=" + turma +
                 ", student=" + student +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Atividade)) return false;
+        if (!super.equals(o)) return false;
+        Atividade atividade = (Atividade) o;
+        return description.equals(atividade.description) &&
+                status.equals(atividade.status) &&
+                releaseDate.equals(atividade.releaseDate) &&
+                endDate.equals(atividade.endDate) &&
+                semestre.equals(atividade.semestre) &&
+                turma.equals(atividade.turma) &&
+                student.equals(atividade.student);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), description, status, releaseDate, endDate, semestre, turma, student);
     }
 }
