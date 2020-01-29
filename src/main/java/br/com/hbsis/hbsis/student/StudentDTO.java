@@ -1,5 +1,6 @@
 package br.com.hbsis.hbsis.student;
 
+import br.com.hbsis.hbsis.annotations.ContactNumberConstraint;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ public class StudentDTO {
     private String sex;
     @NotNull(message = "Informe a idade do estudante")
     private Integer age;
+    @ContactNumberConstraint
     @Size(min = 1, max = 11, message = "Numero de caracteres não suportado")
     private String telephone;
     @Size(min = 1, max = 200, message = "Numero de caracteres não suportado")
@@ -30,18 +32,13 @@ public class StudentDTO {
     @NotNull(message = "Informe o cpf do Aluno")
     @Size(min = 1, max = 14, message = "Numero de caracters não suportado")
     private String cpf;
+    @NotNull
+    private Long idTurma;
 
     public StudentDTO() {
     }
 
-    public StudentDTO(Long id,
-                      @NotNull(message = "O nome do Estudante não pode estar nulo") @Size(min = 1, max = 100, message = "Numero de caracteres não suportado") String nameStudent,
-                      @NotNull(message = "A matricula não pode estar nula") @Size(min = 1, max = 100, message = "Numero de caracteres não suportado") String registration,
-                      @NotNull(message = "Informe o sexo do estudante") @Size(min = 1, max = 10, message = "Numero de caracteres não suportado") String sex,
-                      @NotNull(message = "Informe a idade do estudante") Integer age, @Size(min = 1, max = 11, message = "Numero de caracteres não suportado") String telephone,
-                      @Size(min = 1, max = 200, message = "Numero de caracteres não suportado") String address,
-                      @NotNull(message = "Informe o email do estudante") @Size(min = 1, max = 250, message = "Numero de caracteres não suportado") String email,
-                      @CPF @NotNull(message = "Informe o cpf do Aluno") @Size(min = 1, max = 14, message = "Numero de caracters não suportado") String cpf) {
+    public StudentDTO(Long id, String nameStudent, String registration, String sex, Integer age, String telephone, String address, String email, String cpf, Long idTurma) {
         this.id = id;
         this.nameStudent = nameStudent;
         this.registration = registration;
@@ -51,6 +48,7 @@ public class StudentDTO {
         this.address = address;
         this.email = email;
         this.cpf = cpf;
+        this.idTurma = idTurma;
     }
 
     public static StudentDTO of(Student student) {
@@ -63,7 +61,8 @@ public class StudentDTO {
                 student.getTelephone(),
                 student.getAddress(),
                 student.getEmail(),
-                student.getCpf()
+                student.getCpf(),
+                student.getTurma().getId()
         );
     }
 

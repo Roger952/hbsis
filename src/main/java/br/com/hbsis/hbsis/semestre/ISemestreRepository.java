@@ -1,8 +1,8 @@
-package br.com.hbsis.hbsis.intituicao;
+package br.com.hbsis.hbsis.semestre;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface IIntituicaoRepository extends JpaRepository<Instituicao, Long> {
+interface ISemestreRepository extends JpaRepository<Semestre, Long> {
 }

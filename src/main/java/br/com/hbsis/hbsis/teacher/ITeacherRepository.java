@@ -4,5 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ITeacherRepository extends JpaRepository<Teacher, Long> {
+interface ITeacherRepository extends JpaRepository<Teacher, Long> {
+    boolean existsByCpf(String cpf);
+
+    boolean existsByEmail(String email);
 }
