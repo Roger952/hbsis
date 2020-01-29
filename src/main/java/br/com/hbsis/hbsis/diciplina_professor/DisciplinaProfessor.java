@@ -7,6 +7,7 @@ import br.com.hbsis.hbsis.utils.AbstractEntity;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Objects;
 
 @Entity(name = "disciplina_professor")
 public class DisciplinaProfessor extends AbstractEntity {
@@ -40,5 +41,20 @@ public class DisciplinaProfessor extends AbstractEntity {
                 "disciplina=" + disciplina +
                 ", teacher=" + teacher +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DisciplinaProfessor)) return false;
+        if (!super.equals(o)) return false;
+        DisciplinaProfessor that = (DisciplinaProfessor) o;
+        return disciplina.equals(that.disciplina) &&
+                teacher.equals(that.teacher);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), disciplina, teacher);
     }
 }

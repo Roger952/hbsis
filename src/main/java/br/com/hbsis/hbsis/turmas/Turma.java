@@ -1,6 +1,7 @@
 package br.com.hbsis.hbsis.turmas;
 
 import br.com.hbsis.hbsis.diciplina_professor.DisciplinaProfessor;
+import br.com.hbsis.hbsis.intituicao.Instituicao;
 import br.com.hbsis.hbsis.turmas.Serie.Serie;
 import br.com.hbsis.hbsis.utils.AbstractEntity;
 
@@ -17,12 +18,19 @@ public class Turma extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "id_serie", nullable = false, referencedColumnName = "id")
     private Serie serie;
+    @ManyToOne
+    @JoinColumn(name = "id_instituicao", nullable = false, referencedColumnName = "id")
+    private Instituicao instituicao;
 
-    @ManyToMany
-    @JoinTable(name = "turma_materias",
-            joinColumns = {@JoinColumn(name = "id_turma", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id_disciplina_professor", referencedColumnName = "id")})
-    List<DisciplinaProfessor> disciplinaProfessores;
+    public Turma() {
+    }
+
+    public Turma(String nameTurma, Integer amountOfStudents, Serie serie, Instituicao instituicao) {
+        this.nameTurma = nameTurma;
+        this.amountOfStudents = amountOfStudents;
+        this.serie = serie;
+        this.instituicao = instituicao;
+    }
 
     public String getNameTurma() {
         return nameTurma;
@@ -48,12 +56,12 @@ public class Turma extends AbstractEntity {
         this.serie = serie;
     }
 
-    public List<DisciplinaProfessor> getDisciplinaProfessores() {
-        return disciplinaProfessores;
+    public Instituicao getInstituicao() {
+        return instituicao;
     }
 
-    public void setDisciplinaProfessores(List<DisciplinaProfessor> disciplinaProfessores) {
-        this.disciplinaProfessores = disciplinaProfessores;
+    public void setInstituicao(Instituicao instituicao) {
+        this.instituicao = instituicao;
     }
 
     @Override
@@ -62,7 +70,7 @@ public class Turma extends AbstractEntity {
                 "nameTurma='" + nameTurma + '\'' +
                 ", amountOfStudents=" + amountOfStudents +
                 ", serie=" + serie +
-                ", disciplinaProfessores=" + disciplinaProfessores +
+                ", instituicao=" + instituicao +
                 '}';
     }
 }

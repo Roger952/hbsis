@@ -11,29 +11,27 @@ public class TurmaDTO {
     private String nameTurma;
     private Integer amountOfStudents;
     private Long idSerie;
-    List<DisciplinaProfessorDTO> disciplinaProfessorDTOS;
+    private Long idInstituicao;
 
     public TurmaDTO() {
     }
 
-    public TurmaDTO(Long id, String nameTurma, Integer amountOfStudents, Long idSerie, List<DisciplinaProfessorDTO> disciplinaProfessorDTOS) {
+    public TurmaDTO(Long id, String nameTurma, Integer amountOfStudents, Long idSerie, Long idInstituicao) {
         this.id = id;
         this.nameTurma = nameTurma;
         this.amountOfStudents = amountOfStudents;
         this.idSerie = idSerie;
-        this.disciplinaProfessorDTOS = disciplinaProfessorDTOS;
+        this.idInstituicao = idInstituicao;
     }
 
     public static TurmaDTO of(Turma turma) {
 
-        List<DisciplinaProfessorDTO> disciplinaProfessorDTOS = new ArrayList<>();
-        turma.getDisciplinaProfessores().forEach(disciplinaProfessor -> disciplinaProfessorDTOS.add(DisciplinaProfessorDTO.of(disciplinaProfessor)));
         return new TurmaDTO(
                 turma.getId(),
                 turma.getNameTurma(),
                 turma.getAmountOfStudents(),
                 turma.getSerie().getId(),
-                disciplinaProfessorDTOS
+                turma.getInstituicao().getId()
         );
     }
 
@@ -69,12 +67,12 @@ public class TurmaDTO {
         this.idSerie = idSerie;
     }
 
-    public List<DisciplinaProfessorDTO> getDisciplinaProfessorDTOS() {
-        return disciplinaProfessorDTOS;
+    public Long getIdInstituicao() {
+        return idInstituicao;
     }
 
-    public void setDisciplinaProfessorDTOS(List<DisciplinaProfessorDTO> disciplinaProfessorDTOS) {
-        this.disciplinaProfessorDTOS = disciplinaProfessorDTOS;
+    public void setIdInstituicao(Long idInstituicao) {
+        this.idInstituicao = idInstituicao;
     }
 
     @Override
@@ -84,7 +82,7 @@ public class TurmaDTO {
                 ", nameTurma='" + nameTurma + '\'' +
                 ", amountOfStudents=" + amountOfStudents +
                 ", idSerie=" + idSerie +
-                ", disciplinaProfessorDTOS=" + disciplinaProfessorDTOS +
+                ", idInstituicao=" + idInstituicao +
                 '}';
     }
 }

@@ -1,8 +1,9 @@
 package br.com.hbsis.hbsis.atividade;
 
+import br.com.hbsis.hbsis.disciplina.Disciplina;
 import br.com.hbsis.hbsis.semestre.Semestre;
 import br.com.hbsis.hbsis.student.Student;
-import br.com.hbsis.hbsis.turmas.Turma;
+import br.com.hbsis.hbsis.teacher.Teacher;
 import br.com.hbsis.hbsis.utils.AbstractEntity;
 
 import javax.persistence.Column;
@@ -27,11 +28,16 @@ public class Atividade extends AbstractEntity {
     @JoinColumn(name = "id_semestre", referencedColumnName = "id", nullable = false)
     private Semestre semestre;
     @ManyToOne
-    @JoinColumn(name = "id_turma_materia", referencedColumnName = "id", nullable = false)
-    private Turma turma;
+    @JoinColumn(name = "id_disciplina", referencedColumnName = "id", nullable = false)
+    private Disciplina disciplina;
+    @ManyToOne
+    @JoinColumn(name = "id_professor", referencedColumnName = "id", nullable = false)
+    private Teacher teacher;
     @ManyToOne
     @JoinColumn(name = "id_estudante", referencedColumnName = "id", nullable = false)
     private Student student;
+    @Column(name = "notas")
+    private Double grades;
 
     public String getDescription() {
         return description;
@@ -73,12 +79,12 @@ public class Atividade extends AbstractEntity {
         this.semestre = semestre;
     }
 
-    public Turma getTurma() {
-        return turma;
+    public Disciplina getDisciplina() {
+        return disciplina;
     }
 
-    public void setTurma(Turma turma) {
-        this.turma = turma;
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
     public Student getStudent() {
@@ -89,6 +95,22 @@ public class Atividade extends AbstractEntity {
         this.student = student;
     }
 
+    public Double getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Double grades) {
+        this.grades = grades;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
     @Override
     public String toString() {
         return "Atividade{" +
@@ -97,8 +119,10 @@ public class Atividade extends AbstractEntity {
                 ", releaseDate=" + releaseDate +
                 ", endDate=" + endDate +
                 ", semestre=" + semestre +
-                ", turma=" + turma +
+                ", disciplina=" + disciplina +
+                ", teacher=" + teacher +
                 ", student=" + student +
+                ", grades=" + grades +
                 '}';
     }
 
@@ -113,12 +137,14 @@ public class Atividade extends AbstractEntity {
                 releaseDate.equals(atividade.releaseDate) &&
                 endDate.equals(atividade.endDate) &&
                 semestre.equals(atividade.semestre) &&
-                turma.equals(atividade.turma) &&
-                student.equals(atividade.student);
+                disciplina.equals(atividade.disciplina) &&
+                teacher.equals(atividade.teacher) &&
+                student.equals(atividade.student) &&
+                grades.equals(atividade.grades);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), description, status, releaseDate, endDate, semestre, turma, student);
+        return Objects.hash(super.hashCode(), description, status, releaseDate, endDate, semestre, disciplina, teacher, student, grades);
     }
 }

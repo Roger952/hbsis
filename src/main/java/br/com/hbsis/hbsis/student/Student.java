@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Objects;
 
 @Entity(name = "estudante")
 public class Student extends AbstractEntity {
@@ -39,6 +40,20 @@ public class Student extends AbstractEntity {
     @JoinColumn(name = "id_turma", nullable = false, referencedColumnName = "id")
     private Turma turma;
 
+    public Student() {
+    }
+
+    public Student(String nameStudent, String registration, String sex, Integer age, String telephone, String address, String email, String cpf, Turma turma) {
+        this.nameStudent = nameStudent;
+        this.registration = registration;
+        this.sex = sex;
+        this.age = age;
+        this.telephone = telephone;
+        this.address = address;
+        this.email = email;
+        this.cpf = cpf;
+        this.turma = turma;
+    }
 
     public String getNameStudent() {
         return nameStudent;
@@ -125,5 +140,27 @@ public class Student extends AbstractEntity {
                 ", cpf='" + cpf + '\'' +
                 ", turma=" + turma +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        if (!super.equals(o)) return false;
+        Student student = (Student) o;
+        return nameStudent.equals(student.nameStudent) &&
+                registration.equals(student.registration) &&
+                sex.equals(student.sex) &&
+                age.equals(student.age) &&
+                telephone.equals(student.telephone) &&
+                address.equals(student.address) &&
+                email.equals(student.email) &&
+                cpf.equals(student.cpf) &&
+                turma.equals(student.turma);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), nameStudent, registration, sex, age, telephone, address, email, cpf, turma);
     }
 }
