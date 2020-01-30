@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface IYearRepository extends JpaRepository<Year, Long> {
+interface IYearRepository extends JpaRepository<Year, Long> {
 
     Optional<Year> findByNameYear(String year);
 }

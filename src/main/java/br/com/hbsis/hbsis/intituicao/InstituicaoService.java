@@ -35,4 +35,8 @@ public class InstituicaoService {
 
         return iIntituicaoRepository.findAll();
     }
+
+    public List<Instituicao> findByNameInstituicaoContaining(String nameInstituicao) {
+        return iIntituicaoRepository.findByNameInstituicaoContaining(nameInstituicao);
+    }
 }

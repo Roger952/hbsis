@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -75,4 +76,18 @@ public class StudentService {
 
         throw new IllegalArgumentException("Não foi possivel encontrar um estudante com ete id");
     }
+
+    public List<Student> findByTurmaAndNameStudentContaining(Long idTurma, String nameSrudentContaining) {
+        return iStudentRepository.findByTurmaAndNameStudentContaining(turmaService.findById(idTurma), nameSrudentContaining);
+    }
+
+    public Student findByRegister(String register) {
+        Optional<Student> studentOptional = iStudentRepository.findByRegistration(register);
+
+        if (studentOptional.isPresent()) {
+            return studentOptional.get();
+        }
+        throw new IllegalArgumentException("Não foi possivel encontrar um estudante com ete id");
+    }
+
 }

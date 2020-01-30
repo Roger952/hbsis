@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,7 +44,7 @@ public class TurmaService {
         return TurmaDTO.of(turma);
     }
 
-    public Turma of(TurmaDTO turmaDTO) {
+    private Turma of(TurmaDTO turmaDTO) {
 
         LOGGER.info("Removing DTO");
 
@@ -55,11 +56,15 @@ public class TurmaService {
         );
     }
 
-    public void validate(TurmaDTO turmaDTO) {
+    private void validate(TurmaDTO turmaDTO) {
         LOGGER.info("Validando a turma inserida");
 
         if (iTurmaRepository.existsByNameTurma(turmaDTO.getNameTurma())) {
             throw new IllegalArgumentException("Já existe uma turma cadastrada com este nome");
         }
+    }
+
+    public List<Turma> findByInstituicaoAndNameTurmaContaining(Long idInstituicao, String nameInstitucao) {
+        return iTurmaRepository.findByInstituicaoAndNameTurmaContaining(instituicaoService.findById(idInstituicao), nameInstitucao);
     }
 }

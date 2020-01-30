@@ -35,4 +35,10 @@ public class InstituicaoRest {
 
         return instituicaoService.findById(id);
     }
+
+    @GetMapping("/findByIntituicaoContainingName/{nameInstituicao}")
+    public List<Instituicao> findByContainingNameInstituicao(@PathVariable(name = "nameInstituicao") String nameInstituicao) {
+
+        return instituicaoService.findByNameInstituicaoContaining(nameInstituicao);
+    }
 }
