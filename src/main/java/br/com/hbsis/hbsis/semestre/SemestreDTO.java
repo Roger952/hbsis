@@ -27,7 +27,7 @@ public class SemestreDTO {
                 semestre.getNameSemestre(),
                 semestre.getDateOfStart(),
                 semestre.getDateFinal(),
-                semestre.getYear()
+                semestre.getYear().getId()
         );
     }
 
