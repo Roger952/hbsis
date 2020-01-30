@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class StudentService {
 
@@ -50,17 +52,27 @@ public class StudentService {
     private void validate(StudentDTO studentDTO) {
         LOGGER.info("Validating students DTO");
 
-        if (iStudentRepository.existsByCpf(studentDTO.getCpf())){
+        if (iStudentRepository.existsByCpf(studentDTO.getCpf())) {
             throw new IllegalArgumentException("Já existe um aluno cadatrado com este cpf");
         }
-        if (iStudentRepository.existsByEmail(studentDTO.getEmail())){
+        if (iStudentRepository.existsByEmail(studentDTO.getEmail())) {
             throw new IllegalArgumentException("Já existe um aluno cadastrado com este email");
         }
-        if (iStudentRepository.existsByRegistration(studentDTO.getRegistration())){
+        if (iStudentRepository.existsByRegistration(studentDTO.getRegistration())) {
             throw new IllegalArgumentException("Já existe um aluno cadastrado com esta matricula");
         }
-        if (studentDTO.getTelephone().matches("(\\(\\d{2}\\)\\s)(\\d{4,5}-\\d{4})")){
+        if (studentDTO.getTelephone().matches("(\\(\\d{2}\\)\\s)(\\d{4,5}-\\d{4})")) {
             studentDTO.setTelephone(studentDTO.getTelephone().replaceAll("[^0-9]", ""));
         }
+    }
+
+    public Student findById(Long id) {
+        Optional<Student> studentOptional = iStudentRepository.findById(id);
+
+        if (studentOptional.isPresent()) {
+            return studentOptional.get();
+        }
+
+        throw new IllegalArgumentException("Não foi possivel encontrar um estudante com ete id");
     }
 }

@@ -39,6 +39,21 @@ public class Atividade extends AbstractEntity {
     @Column(name = "notas")
     private Double grades;
 
+    public Atividade() {
+    }
+
+    public Atividade(String description, String status, Date releaseDate, Date endDate, Semestre semestre, Disciplina disciplina, Teacher teacher, Student student, Double grades) {
+        this.description = description;
+        this.status = status;
+        this.releaseDate = releaseDate;
+        this.endDate = endDate;
+        this.semestre = semestre;
+        this.disciplina = disciplina;
+        this.teacher = teacher;
+        this.student = student;
+        this.grades = grades;
+    }
+
     public String getDescription() {
         return description;
     }
