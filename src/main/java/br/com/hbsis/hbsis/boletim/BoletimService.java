@@ -1,5 +1,6 @@
 package br.com.hbsis.hbsis.boletim;
 
+import br.com.hbsis.hbsis.atividade.Atividade;
 import br.com.hbsis.hbsis.disciplina.DisciplinaService;
 import br.com.hbsis.hbsis.semestre.SemestreService;
 import br.com.hbsis.hbsis.student.StudentService;
@@ -7,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -76,5 +78,33 @@ public class BoletimService {
         }
 
         throw new IllegalArgumentException("Não foi encontrado um Boetim com este Id");
+    }
+
+    public void autoUpdateBoletimForIdBoletim(Long id) {
+
+        Optional<Boletim> boletimOptional = iBoletimRepository.findById(id);
+
+        if (boletimOptional.isPresent()) {
+
+            Boletim boletim = boletimOptional.get();
+
+            iBoletimRepository.save(updateMedia(boletim, boletim.getAtividadeSet()));
+        } else {
+            LOGGER.info("Não foi encontrado um boletim com este Id");
+        }
+    }
+
+    private Boletim updateMedia(Boletim boletim, List<Atividade> atividades) {
+
+        double somaAtividades = 0;
+        int contador = 0;
+
+        for (Atividade atividade : atividades) {
+            somaAtividades += atividade.getGrades();
+            contador++;
+            boletim.setMediaFinal(somaAtividades / contador);
+        }
+
+        return boletim;
     }
 }

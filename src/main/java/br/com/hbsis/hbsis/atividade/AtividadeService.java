@@ -31,7 +31,13 @@ public class AtividadeService {
 
         atividade = iAtividadeRepository.save(atividade);
 
+        updateBoletim(atividade.getBoletim().getId());
+
         return AtividadeDTO.of(atividade);
+    }
+
+    private void updateBoletim(Long idBoletim) {
+        boletimService.autoUpdateBoletimForIdBoletim(idBoletim);
     }
 
     public Atividade of(AtividadeDTO atividadeDTO) {

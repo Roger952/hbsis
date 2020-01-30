@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IBoletimRepository extends JpaRepository<Boletim, Long> {
 
-    boolean existsByDisciplinaAndSemestreAndStudent (Disciplina disciplina, Semestre semestre, Student student);
+    boolean existsByDisciplinaAndSemestreAndStudent(Disciplina disciplina, Semestre semestre, Student student);
+
 }

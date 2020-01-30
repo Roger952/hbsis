@@ -1,14 +1,13 @@
 package br.com.hbsis.hbsis.boletim;
 
+import br.com.hbsis.hbsis.atividade.Atividade;
 import br.com.hbsis.hbsis.disciplina.Disciplina;
 import br.com.hbsis.hbsis.semestre.Semestre;
 import br.com.hbsis.hbsis.student.Student;
 import br.com.hbsis.hbsis.utils.AbstractEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "boletim")
@@ -28,6 +27,9 @@ public class Boletim extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "id_semestre", nullable = false)
     private Semestre semestre;
+
+    @OneToMany(mappedBy = "boletim")
+    private List<Atividade> atividadeSet;
 
     public Boletim() {
     }
@@ -72,6 +74,14 @@ public class Boletim extends AbstractEntity {
         this.semestre = semestre;
     }
 
+    public List<Atividade> getAtividadeSet() {
+        return atividadeSet;
+    }
+
+    public void setAtividadeSet(List<Atividade> atividadeSet) {
+        this.atividadeSet = atividadeSet;
+    }
+
     @Override
     public String toString() {
         return "Boletim{" +
@@ -79,6 +89,7 @@ public class Boletim extends AbstractEntity {
                 ", disciplina=" + disciplina +
                 ", student=" + student +
                 ", semestre=" + semestre +
+                ", atividadeSet=" + atividadeSet +
                 '}';
     }
 
@@ -91,11 +102,12 @@ public class Boletim extends AbstractEntity {
         return mediaFinal.equals(boletim.mediaFinal) &&
                 disciplina.equals(boletim.disciplina) &&
                 student.equals(boletim.student) &&
-                semestre.equals(boletim.semestre);
+                semestre.equals(boletim.semestre) &&
+                atividadeSet.equals(boletim.atividadeSet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), mediaFinal, disciplina, student, semestre);
+        return Objects.hash(super.hashCode(), mediaFinal, disciplina, student, semestre, atividadeSet);
     }
 }
