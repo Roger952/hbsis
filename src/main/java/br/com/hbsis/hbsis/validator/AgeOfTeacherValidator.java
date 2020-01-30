@@ -1,13 +1,13 @@
 package br.com.hbsis.hbsis.validator;
 
-import br.com.hbsis.hbsis.annotations.AgeOfTeacherValidate;
+import br.com.hbsis.hbsis.annotations.ValidAgeOfTeacher;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class AgeOfTeacherValidator implements ConstraintValidator<AgeOfTeacherValidate, Integer> {
+public class AgeOfTeacherValidator implements ConstraintValidator<ValidAgeOfTeacher, Integer> {
     @Override
-    public void initialize(AgeOfTeacherValidate constraintAnnotation) {
+    public void initialize(ValidAgeOfTeacher constraintAnnotation) {
 
     }
 

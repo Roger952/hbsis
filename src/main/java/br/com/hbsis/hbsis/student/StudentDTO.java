@@ -1,7 +1,7 @@
 package br.com.hbsis.hbsis.student;
 
-import br.com.hbsis.hbsis.annotations.AgeOfStudentValidate;
-import br.com.hbsis.hbsis.annotations.ContactNumberConstraint;
+import br.com.hbsis.hbsis.annotations.ValidAgeOfStudent;
+import br.com.hbsis.hbsis.annotations.ValidPhoneNumber;
 import br.com.hbsis.hbsis.annotations.ValidSex;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -27,11 +27,11 @@ public class StudentDTO {
     private String sex;
 
     @NotNull(message = "Informe a idade do estudante")
-    @AgeOfStudentValidate
+    @ValidAgeOfStudent
     private Integer age;
 
     @Size(min = 1, max = 20, message = "Numero de caracteres não suportado")
-    @ContactNumberConstraint
+    @ValidPhoneNumber
     private String telephone;
 
     @Size(min = 1, max = 200, message = "Numero de caracteres não suportado")

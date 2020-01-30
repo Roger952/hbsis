@@ -1,7 +1,7 @@
 package br.com.hbsis.hbsis.teacher;
 
-import br.com.hbsis.hbsis.annotations.AgeOfTeacherValidate;
-import br.com.hbsis.hbsis.annotations.ContactNumberConstraint;
+import br.com.hbsis.hbsis.annotations.ValidAgeOfTeacher;
+import br.com.hbsis.hbsis.annotations.ValidPhoneNumber;
 import br.com.hbsis.hbsis.annotations.ValidSex;
 import br.com.hbsis.hbsis.diciplina_professor.DisciplinaProfessorDTO;
 import org.hibernate.validator.constraints.br.CPF;
@@ -28,10 +28,10 @@ public class TeacherDTO {
     private String sex;
 
     @NotNull(message = "Informe a idade do professor")
-    @AgeOfTeacherValidate(message = "Esta idade mão pode ser aceitada pelo sistema")
+    @ValidAgeOfTeacher(message = "Esta idade mão pode ser aceitada pelo sistema")
     private Integer age;
 
-    @ContactNumberConstraint(message = "Numero inserido não valido")
+    @ValidPhoneNumber(message = "Numero inserido não valido")
     @Size(min = 8, max = 15, message = "Numero de caracteres não suportado")
     private String telephone;
 

@@ -1,21 +1,21 @@
 package br.com.hbsis.hbsis.annotations;
 
-import br.com.hbsis.hbsis.validator.AgeOfStudentValidator;
+
+import br.com.hbsis.hbsis.validator.ContactNumberValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = AgeOfStudentValidator.class)
-@Target({ElementType.FIELD, ElementType.METHOD})
+@Constraint(validatedBy = ContactNumberValidator.class)
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AgeOfStudentValidate {
-    String message() default "Idade não aceitavel";
+public @interface ValidPhoneNumber {
+
+    String message() default "Telefone invalido";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }
-

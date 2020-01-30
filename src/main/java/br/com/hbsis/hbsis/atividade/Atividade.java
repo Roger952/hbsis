@@ -1,8 +1,6 @@
 package br.com.hbsis.hbsis.atividade;
 
-import br.com.hbsis.hbsis.disciplina.Disciplina;
-import br.com.hbsis.hbsis.semestre.Semestre;
-import br.com.hbsis.hbsis.student.Student;
+import br.com.hbsis.hbsis.boletim.Boletim;
 import br.com.hbsis.hbsis.teacher.Teacher;
 import br.com.hbsis.hbsis.utils.AbstractEntity;
 
@@ -25,32 +23,24 @@ public class Atividade extends AbstractEntity {
     @Column(name = "data_entrega", nullable = false)
     private Date endDate;
     @ManyToOne
-    @JoinColumn(name = "id_semestre", referencedColumnName = "id", nullable = false)
-    private Semestre semestre;
-    @ManyToOne
-    @JoinColumn(name = "id_disciplina", referencedColumnName = "id", nullable = false)
-    private Disciplina disciplina;
+    @JoinColumn(name = "id_boletim", referencedColumnName = "id", nullable = false)
+    private Boletim boletim;
     @ManyToOne
     @JoinColumn(name = "id_professor", referencedColumnName = "id", nullable = false)
     private Teacher teacher;
-    @ManyToOne
-    @JoinColumn(name = "id_estudante", referencedColumnName = "id", nullable = false)
-    private Student student;
     @Column(name = "notas")
     private Double grades;
 
     public Atividade() {
     }
 
-    public Atividade(String description, String status, Date releaseDate, Date endDate, Semestre semestre, Disciplina disciplina, Teacher teacher, Student student, Double grades) {
+    public Atividade(String description, String status, Date releaseDate, Date endDate, Boletim boletim, Teacher teacher, Double grades) {
         this.description = description;
         this.status = status;
         this.releaseDate = releaseDate;
         this.endDate = endDate;
-        this.semestre = semestre;
-        this.disciplina = disciplina;
+        this.boletim = boletim;
         this.teacher = teacher;
-        this.student = student;
         this.grades = grades;
     }
 
@@ -86,36 +76,12 @@ public class Atividade extends AbstractEntity {
         this.endDate = endDate;
     }
 
-    public Semestre getSemestre() {
-        return semestre;
+    public Boletim getBoletim() {
+        return boletim;
     }
 
-    public void setSemestre(Semestre semestre) {
-        this.semestre = semestre;
-    }
-
-    public Disciplina getDisciplina() {
-        return disciplina;
-    }
-
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Double getGrades() {
-        return grades;
-    }
-
-    public void setGrades(Double grades) {
-        this.grades = grades;
+    public void setBoletim(Boletim boletim) {
+        this.boletim = boletim;
     }
 
     public Teacher getTeacher() {
@@ -126,6 +92,14 @@ public class Atividade extends AbstractEntity {
         this.teacher = teacher;
     }
 
+    public Double getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Double grades) {
+        this.grades = grades;
+    }
+
     @Override
     public String toString() {
         return "Atividade{" +
@@ -133,10 +107,8 @@ public class Atividade extends AbstractEntity {
                 ", status='" + status + '\'' +
                 ", releaseDate=" + releaseDate +
                 ", endDate=" + endDate +
-                ", semestre=" + semestre +
-                ", disciplina=" + disciplina +
+                ", boletim=" + boletim +
                 ", teacher=" + teacher +
-                ", student=" + student +
                 ", grades=" + grades +
                 '}';
     }
@@ -151,15 +123,13 @@ public class Atividade extends AbstractEntity {
                 status.equals(atividade.status) &&
                 releaseDate.equals(atividade.releaseDate) &&
                 endDate.equals(atividade.endDate) &&
-                semestre.equals(atividade.semestre) &&
-                disciplina.equals(atividade.disciplina) &&
+                boletim.equals(atividade.boletim) &&
                 teacher.equals(atividade.teacher) &&
-                student.equals(atividade.student) &&
                 grades.equals(atividade.grades);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), description, status, releaseDate, endDate, semestre, disciplina, teacher, student, grades);
+        return Objects.hash(super.hashCode(), description, status, releaseDate, endDate, boletim, teacher, grades);
     }
 }

@@ -1,15 +1,15 @@
 package br.com.hbsis.hbsis.validator;
 
-import br.com.hbsis.hbsis.annotations.ContactNumberConstraint;
+import br.com.hbsis.hbsis.annotations.ValidPhoneNumber;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class ContactNumberValidator implements
-        ConstraintValidator<ContactNumberConstraint, String> {
+        ConstraintValidator<ValidPhoneNumber, String> {
 
     @Override
-    public void initialize(ContactNumberConstraint contactNumber) {
+    public void initialize(ValidPhoneNumber contactNumber) {
     }
 
     @Override

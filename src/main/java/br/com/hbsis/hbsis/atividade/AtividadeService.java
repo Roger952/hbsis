@@ -1,8 +1,6 @@
 package br.com.hbsis.hbsis.atividade;
 
-import br.com.hbsis.hbsis.disciplina.DisciplinaService;
-import br.com.hbsis.hbsis.semestre.SemestreService;
-import br.com.hbsis.hbsis.student.StudentService;
+import br.com.hbsis.hbsis.boletim.BoletimService;
 import br.com.hbsis.hbsis.teacher.TeacherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,17 +12,13 @@ public class AtividadeService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AtividadeService.class);
 
     private final IAtividadeRepository iAtividadeRepository;
-    private final StudentService studentService;
-    private final DisciplinaService disciplinaService;
-    private final SemestreService semestreService;
     private final TeacherService teacherService;
+    private final BoletimService boletimService;
 
-    public AtividadeService(IAtividadeRepository iAtividadeRepository, StudentService studentService, DisciplinaService disciplinaService, SemestreService semestreService, TeacherService teacherService) {
+    public AtividadeService(IAtividadeRepository iAtividadeRepository, TeacherService teacherService, BoletimService boletimService) {
         this.iAtividadeRepository = iAtividadeRepository;
-        this.studentService = studentService;
-        this.disciplinaService = disciplinaService;
-        this.semestreService = semestreService;
         this.teacherService = teacherService;
+        this.boletimService = boletimService;
     }
 
     public AtividadeDTO save(AtividadeDTO atividadeDTO) {
@@ -46,10 +40,8 @@ public class AtividadeService {
                 atividadeDTO.getStatus(),
                 atividadeDTO.getReleaseDate(),
                 atividadeDTO.getEndDate(),
-                semestreService.findById(atividadeDTO.getIdSemestre()),
-                disciplinaService.findById(atividadeDTO.getIdDisciplina()),
+                boletimService.findById(atividadeDTO.getIdBoletim()),
                 teacherService.findById(atividadeDTO.getIdTeacher()),
-                studentService.findById(atividadeDTO.getIdStudent()),
                 atividadeDTO.getGrades()
         );
     }

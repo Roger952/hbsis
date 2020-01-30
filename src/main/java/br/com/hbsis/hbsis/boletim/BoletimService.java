@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BoletimService {
 
@@ -64,5 +66,15 @@ public class BoletimService {
                 studentService.findById(boletimDTO.getStudent()),
                 semestreService.findById(boletimDTO.getSemestre())
         );
+    }
+
+    public Boletim findById(Long id) {
+        Optional<Boletim> boletimOptional = iBoletimRepository.findById(id);
+
+        if (boletimOptional.isPresent()) {
+            return boletimOptional.get();
+        }
+
+        throw new IllegalArgumentException("Não foi encontrado um Boetim com este Id");
     }
 }

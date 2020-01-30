@@ -1,45 +1,58 @@
 package br.com.hbsis.hbsis.atividade;
 
+import br.com.hbsis.hbsis.annotations.ValidGrade;
+import br.com.hbsis.hbsis.annotations.ValidStatus;
+
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class AtividadeDTO {
+
+    private Long id;
+    @Size(min = 1, max = 100)
     private String description;
+    @ValidStatus
     private String status;
     private Date releaseDate;
     private Date endDate;
-    private Long idSemestre;
     private Long idTeacher;
-    private Long idDisciplina;
-    private Long idStudent;
+    private Long idBoletim;
+    @ValidGrade
     private Double grades;
 
     public AtividadeDTO() {
     }
 
-    public AtividadeDTO(String description, String status, Date releaseDate, Date endDate, Long idSemestre, Long idTeacher, Long idDisciplina, Long idStudent, Double grades) {
+    public AtividadeDTO(Long id, String description, String status, Date releaseDate, Date endDate, Long idTeacher, Long idBoletim, Double grades) {
+        this.id = id;
         this.description = description;
         this.status = status;
         this.releaseDate = releaseDate;
         this.endDate = endDate;
-        this.idSemestre = idSemestre;
         this.idTeacher = idTeacher;
-        this.idDisciplina = idDisciplina;
-        this.idStudent = idStudent;
+        this.idBoletim = idBoletim;
         this.grades = grades;
     }
 
     public static AtividadeDTO of(Atividade atividade) {
         return new AtividadeDTO(
+                atividade.getId(),
                 atividade.getDescription(),
                 atividade.getStatus(),
                 atividade.getReleaseDate(),
                 atividade.getEndDate(),
-                atividade.getSemestre().getId(),
                 atividade.getTeacher().getId(),
-                atividade.getDisciplina().getId(),
-                atividade.getStudent().getId(),
+                atividade.getBoletim().getId(),
                 atividade.getGrades()
         );
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -74,28 +87,20 @@ public class AtividadeDTO {
         this.endDate = endDate;
     }
 
-    public Long getIdSemestre() {
-        return idSemestre;
+    public Long getIdTeacher() {
+        return idTeacher;
     }
 
-    public Long getIdStudent() {
-        return idStudent;
+    public void setIdTeacher(Long idTeacher) {
+        this.idTeacher = idTeacher;
     }
 
-    public void setIdStudent(Long idStudent) {
-        this.idStudent = idStudent;
+    public Long getIdBoletim() {
+        return idBoletim;
     }
 
-    public void setIdSemestre(Long idSemestre) {
-        this.idSemestre = idSemestre;
-    }
-
-    public Long getIdDisciplina() {
-        return idDisciplina;
-    }
-
-    public void setIdDisciplina(Long idDisciplina) {
-        this.idDisciplina = idDisciplina;
+    public void setIdBoletim(Long idBoletim) {
+        this.idBoletim = idBoletim;
     }
 
     public Double getGrades() {
@@ -106,25 +111,16 @@ public class AtividadeDTO {
         this.grades = grades;
     }
 
-    public Long getIdTeacher() {
-        return idTeacher;
-    }
-
-    public void setIdTeacher(Long idTeacher) {
-        this.idTeacher = idTeacher;
-    }
-
     @Override
     public String toString() {
         return "AtividadeDTO{" +
-                "description='" + description + '\'' +
+                "id=" + id +
+                ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
                 ", releaseDate=" + releaseDate +
                 ", endDate=" + endDate +
-                ", idSemestre=" + idSemestre +
                 ", idTeacher=" + idTeacher +
-                ", idDisciplina=" + idDisciplina +
-                ", idStudent=" + idStudent +
+                ", idBoletim=" + idBoletim +
                 ", grades=" + grades +
                 '}';
     }
