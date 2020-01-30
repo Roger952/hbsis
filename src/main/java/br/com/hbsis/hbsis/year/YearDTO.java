@@ -1,7 +1,5 @@
 package br.com.hbsis.hbsis.year;
 
-import java.util.Objects;
-
 public class YearDTO {
 
     private Long id;
@@ -44,19 +42,5 @@ public class YearDTO {
                 "id=" + id +
                 ", nameYear='" + nameYear + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof YearDTO)) return false;
-        YearDTO yearDTO = (YearDTO) o;
-        return id.equals(yearDTO.id) &&
-                nameYear.equals(yearDTO.nameYear);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nameYear);
     }
 }

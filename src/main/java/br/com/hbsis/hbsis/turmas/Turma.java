@@ -1,12 +1,13 @@
 package br.com.hbsis.hbsis.turmas;
 
-import br.com.hbsis.hbsis.diciplina_professor.DisciplinaProfessor;
 import br.com.hbsis.hbsis.intituicao.Instituicao;
 import br.com.hbsis.hbsis.turmas.Serie.Serie;
 import br.com.hbsis.hbsis.utils.AbstractEntity;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity(name = "turma")
 public class Turma extends AbstractEntity {

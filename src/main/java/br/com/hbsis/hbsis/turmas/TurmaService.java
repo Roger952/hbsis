@@ -55,10 +55,10 @@ public class TurmaService {
         );
     }
 
-    public void validate (TurmaDTO turmaDTO){
+    public void validate(TurmaDTO turmaDTO) {
         LOGGER.info("Validando a turma inserida");
 
-        if (iTurmaRepository.existsByNameTurma(turmaDTO.getNameTurma())){
+        if (iTurmaRepository.existsByNameTurma(turmaDTO.getNameTurma())) {
             throw new IllegalArgumentException("Já existe uma turma cadastrada com este nome");
         }
     }

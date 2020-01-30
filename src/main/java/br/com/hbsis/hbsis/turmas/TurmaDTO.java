@@ -1,10 +1,5 @@
 package br.com.hbsis.hbsis.turmas;
 
-import br.com.hbsis.hbsis.diciplina_professor.DisciplinaProfessorDTO;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class TurmaDTO {
 
     private Long id;

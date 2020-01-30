@@ -1,7 +1,6 @@
 package br.com.hbsis.hbsis.atividade;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class AtividadeDTO {
     private String description;
@@ -128,26 +127,5 @@ public class AtividadeDTO {
                 ", idStudent=" + idStudent +
                 ", grades=" + grades +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AtividadeDTO)) return false;
-        AtividadeDTO that = (AtividadeDTO) o;
-        return description.equals(that.description) &&
-                status.equals(that.status) &&
-                releaseDate.equals(that.releaseDate) &&
-                endDate.equals(that.endDate) &&
-                idSemestre.equals(that.idSemestre) &&
-                idTeacher.equals(that.idTeacher) &&
-                idDisciplina.equals(that.idDisciplina) &&
-                idStudent.equals(that.idStudent) &&
-                grades.equals(that.grades);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(description, status, releaseDate, endDate, idSemestre, idTeacher, idDisciplina, idStudent, grades);
     }
 }

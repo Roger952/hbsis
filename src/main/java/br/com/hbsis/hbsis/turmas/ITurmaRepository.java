@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ITurmaRepository extends JpaRepository<Turma, Long> {
 
-    boolean existsByNameTurma (String nameTurma);
+    boolean existsByNameTurma(String nameTurma);
 }

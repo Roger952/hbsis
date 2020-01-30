@@ -13,10 +13,10 @@ public class SerieService {
         this.iSerieRepository = iSerieRepository;
     }
 
-    public Serie findById(Long id){
+    public Serie findById(Long id) {
         Optional<Serie> serieOptional = iSerieRepository.findById(id);
 
-        if (serieOptional.isPresent()){
+        if (serieOptional.isPresent()) {
             return serieOptional.get();
         }
         throw new IllegalArgumentException("Não foi possivel encontar uma serie com este id");
