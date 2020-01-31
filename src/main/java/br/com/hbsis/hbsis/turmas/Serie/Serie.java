@@ -4,6 +4,7 @@ import br.com.hbsis.hbsis.utils.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.util.Objects;
 
 @Entity(name = "serie")
 public class Serie extends AbstractEntity {
@@ -35,5 +36,20 @@ public class Serie extends AbstractEntity {
                 "numberSerie=" + numberSerie +
                 ", nameSerie='" + nameSerie + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Serie)) return false;
+        if (!super.equals(o)) return false;
+        Serie serie = (Serie) o;
+        return numberSerie.equals(serie.numberSerie) &&
+                nameSerie.equals(serie.nameSerie);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), numberSerie, nameSerie);
     }
 }

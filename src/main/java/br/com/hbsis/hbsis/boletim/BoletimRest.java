@@ -26,9 +26,9 @@ public class BoletimRest {
     }
 
     @GetMapping("/extractBoletim/{idStudante}/{idAno}")
-    public List<BoletimDTO> extractBoletim(@PathVariable(name = "idStudante") Long idStudent, @PathVariable(name = "idAno") Long idYear) {
+    public List<BoletimDTO> extractBoletim(@PathVariable(name = "idStudante") Long idStudent, @PathVariable(name = "idAno") String year) {
         LOGGER.info("Extraindo o boletim");
 
-        return boletimService.findByStudentAndYear(idStudent, idYear);
+        return boletimService.findByStudentAndYear(idStudent, year);
     }
 }

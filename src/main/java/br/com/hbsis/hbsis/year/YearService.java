@@ -1,15 +1,11 @@
 package br.com.hbsis.hbsis.year;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class YearService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(YearService.class);
 
     private final IYearRepository iYearRepository;
 

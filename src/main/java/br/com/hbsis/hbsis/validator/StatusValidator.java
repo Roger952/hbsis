@@ -6,10 +6,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class StatusValidator implements ConstraintValidator<ValidStatus, String> {
-    @Override
-    public void initialize(ValidStatus constraintAnnotation) {
-
-    }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {

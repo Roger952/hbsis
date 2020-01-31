@@ -1,10 +1,14 @@
 package br.com.hbsis.hbsis.student;
 
+import br.com.hbsis.hbsis.boletim.BoletimService;
 import br.com.hbsis.hbsis.turmas.TurmaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +19,12 @@ public class StudentService {
 
     private final IStudentRepository iStudentRepository;
     private final TurmaService turmaService;
+    private final BoletimService boletimService;
 
-    public StudentService(IStudentRepository iStudentRepository, TurmaService turmaService) {
+    public StudentService(IStudentRepository iStudentRepository, TurmaService turmaService, @Lazy BoletimService boletimService) {
         this.iStudentRepository = iStudentRepository;
         this.turmaService = turmaService;
+        this.boletimService = boletimService;
     }
 
     public StudentDTO save(StudentDTO studentDTO) {
@@ -29,6 +35,10 @@ public class StudentService {
         Student student = of(studentDTO);
 
         student = iStudentRepository.save(student);
+
+        Calendar calendar = new GregorianCalendar();
+
+        boletimService.autoSaveBoletim(String.valueOf(calendar.get(Calendar.YEAR)), student);
 
         return StudentDTO.of(student);
     }

@@ -6,10 +6,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class SexValidator implements ConstraintValidator<ValidSex, String> {
-    @Override
-    public void initialize(ValidSex constraintAnnotation) {
-
-    }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {

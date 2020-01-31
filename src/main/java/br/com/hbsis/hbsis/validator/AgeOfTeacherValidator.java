@@ -6,10 +6,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class AgeOfTeacherValidator implements ConstraintValidator<ValidAgeOfTeacher, Integer> {
-    @Override
-    public void initialize(ValidAgeOfTeacher constraintAnnotation) {
-
-    }
 
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext context) {

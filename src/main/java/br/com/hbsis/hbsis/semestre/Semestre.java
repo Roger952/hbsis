@@ -1,13 +1,12 @@
 package br.com.hbsis.hbsis.semestre;
 
+import br.com.hbsis.hbsis.boletim.Boletim;
 import br.com.hbsis.hbsis.utils.AbstractEntity;
 import br.com.hbsis.hbsis.year.Year;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "semestre")
@@ -22,6 +21,8 @@ public class Semestre extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "id_ano", nullable = false, referencedColumnName = "id")
     private Year year;
+    @OneToMany(mappedBy = "semestre")
+    private List<Boletim> boletims;
 
     public String getNameSemestre() {
         return nameSemestre;
@@ -53,6 +54,14 @@ public class Semestre extends AbstractEntity {
 
     public void setYear(Year year) {
         this.year = year;
+    }
+
+    public List<Boletim> getBoletims() {
+        return boletims;
+    }
+
+    public void setBoletims(List<Boletim> boletims) {
+        this.boletims = boletims;
     }
 
     @Override

@@ -2,6 +2,7 @@ package br.com.hbsis.hbsis.intituicao;
 
 public class InstituicaoDTO {
 
+    private Long id;
     private String nameInstituicao;
     private String typeInstituicao;
 
@@ -9,6 +10,7 @@ public class InstituicaoDTO {
     }
 
     public InstituicaoDTO(Long id, String nameInstituicao, String typeInstituicao) {
+        this.id = id;
         this.nameInstituicao = nameInstituicao;
         this.typeInstituicao = typeInstituicao;
     }

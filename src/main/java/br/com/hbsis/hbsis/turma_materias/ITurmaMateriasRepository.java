@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface ITurmaMaterias extends JpaRepository<TurmaMaterias, Long> {
+interface ITurmaMateriasRepository extends JpaRepository<TurmaMaterias, Long> {
 
 }

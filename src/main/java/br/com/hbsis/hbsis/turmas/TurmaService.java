@@ -1,9 +1,12 @@
 package br.com.hbsis.hbsis.turmas;
 
 import br.com.hbsis.hbsis.intituicao.InstituicaoService;
+import br.com.hbsis.hbsis.turma_materias.TurmaMateriasDTO;
+import br.com.hbsis.hbsis.turma_materias.TurmaMateriasService;
 import br.com.hbsis.hbsis.turmas.Serie.SerieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +20,13 @@ public class TurmaService {
     private final ITurmaRepository iTurmaRepository;
     private final SerieService serieService;
     private final InstituicaoService instituicaoService;
+    private final TurmaMateriasService turmaMateriasService;
 
-    public TurmaService(ITurmaRepository iTurmaRepository, SerieService serieService, InstituicaoService instituicaoService) {
+    public TurmaService(ITurmaRepository iTurmaRepository, SerieService serieService, InstituicaoService instituicaoService, @Lazy TurmaMateriasService turmaMateriasService) {
         this.iTurmaRepository = iTurmaRepository;
         this.serieService = serieService;
         this.instituicaoService = instituicaoService;
+        this.turmaMateriasService = turmaMateriasService;
     }
 
     public Turma findById(Long id) {
@@ -40,6 +45,8 @@ public class TurmaService {
         Turma turma = of(turmaDTO);
 
         turma = iTurmaRepository.save(turma);
+
+        saveDisciplinas(turmaDTO.getTurmaMateriasDTOList(), turma.getId());
 
         return TurmaDTO.of(turma);
     }
@@ -66,5 +73,13 @@ public class TurmaService {
 
     public List<Turma> findByInstituicaoAndNameTurmaContaining(Long idInstituicao, String nameInstitucao) {
         return iTurmaRepository.findByInstituicaoAndNameTurmaContaining(instituicaoService.findById(idInstituicao), nameInstitucao);
+    }
+
+    private void saveDisciplinas(List<TurmaMateriasDTO> turmaMateriasDTOS, Long idTurma) {
+
+        for (TurmaMateriasDTO turmaMateriasDTO : turmaMateriasDTOS) {
+            turmaMateriasDTO.setIdTurma(idTurma);
+            turmaMateriasService.save(turmaMateriasDTO);
+        }
     }
 }

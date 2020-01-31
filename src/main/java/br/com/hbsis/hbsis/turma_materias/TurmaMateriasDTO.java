@@ -19,7 +19,7 @@ public class TurmaMateriasDTO {
         return new TurmaMateriasDTO(
                 turmaMaterias.getId(),
                 turmaMaterias.getTurma().getId(),
-                turmaMaterias.getDisciplinaProfessor().getId()
+                turmaMaterias.getDisciplina().getId()
         );
     }
 

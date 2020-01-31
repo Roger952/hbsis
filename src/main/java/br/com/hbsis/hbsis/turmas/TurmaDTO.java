@@ -1,5 +1,9 @@
 package br.com.hbsis.hbsis.turmas;
 
+import br.com.hbsis.hbsis.turma_materias.TurmaMateriasDTO;
+
+import java.util.List;
+
 public class TurmaDTO {
 
     private Long id;
@@ -7,6 +11,7 @@ public class TurmaDTO {
     private Integer amountOfStudents;
     private Long idSerie;
     private Long idInstituicao;
+    private List<TurmaMateriasDTO> turmaMateriasDTOList;
 
     public TurmaDTO() {
     }
@@ -20,6 +25,7 @@ public class TurmaDTO {
     }
 
     public static TurmaDTO of(Turma turma) {
+
 
         return new TurmaDTO(
                 turma.getId(),
@@ -70,6 +76,14 @@ public class TurmaDTO {
         this.idInstituicao = idInstituicao;
     }
 
+    public List<TurmaMateriasDTO> getTurmaMateriasDTOList() {
+        return turmaMateriasDTOList;
+    }
+
+    public void setTurmaMateriasDTOList(List<TurmaMateriasDTO> turmaMateriasDTOList) {
+        this.turmaMateriasDTOList = turmaMateriasDTOList;
+    }
+
     @Override
     public String toString() {
         return "TurmaDTO{" +
@@ -78,6 +92,7 @@ public class TurmaDTO {
                 ", amountOfStudents=" + amountOfStudents +
                 ", idSerie=" + idSerie +
                 ", idInstituicao=" + idInstituicao +
+                ", disciplinaDTOS=" + turmaMateriasDTOList +
                 '}';
     }
 }

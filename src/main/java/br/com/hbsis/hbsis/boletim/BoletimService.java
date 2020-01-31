@@ -4,10 +4,13 @@ import br.com.hbsis.hbsis.atividade.Atividade;
 import br.com.hbsis.hbsis.disciplina.DisciplinaService;
 import br.com.hbsis.hbsis.semestre.Semestre;
 import br.com.hbsis.hbsis.semestre.SemestreService;
+import br.com.hbsis.hbsis.student.Student;
 import br.com.hbsis.hbsis.student.StudentService;
+import br.com.hbsis.hbsis.turma_materias.TurmaMaterias;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +52,9 @@ public class BoletimService {
 
         if (existRepeatedBoletim(boletimDTO)) {
             throw new IllegalArgumentException("Já existe um boletim aberto com estas infomações");
+        }
+        if (StringUtils.isEmpty(boletimDTO.getMediaFinal())) {
+            boletimDTO.setMediaFinal((double) 0);
         }
         if (boletimDTO.getMediaFinal() > 10) {
             throw new IllegalArgumentException("Media Inválida");
@@ -110,11 +116,11 @@ public class BoletimService {
         return boletim;
     }
 
-    public List<BoletimDTO> findByStudentAndYear(Long idStudent, Long idYear) {
+    public List<BoletimDTO> findByStudentAndYear(Long idStudent, String year) {
 
         List<BoletimDTO> boletimListDTO = new ArrayList<>();
 
-        for (Semestre semestre : semestreService.findByYearId(idYear)) {
+        for (Semestre semestre : semestreService.findByYear(year)) {
 
             for (Boletim boletim : iBoletimRepository.findByStudentAndSemestre(studentService.findById(idStudent), semestre)) {
                 boletimListDTO.add(BoletimDTO.of(boletim));
@@ -122,5 +128,23 @@ public class BoletimService {
         }
 
         return boletimListDTO;
+    }
+
+    public void autoSaveBoletim(String year, Student student) {
+
+        List<Semestre> semestreList = semestreService.findByYear(year);
+        List<BoletimDTO> boletimList = new ArrayList<>();
+
+        for (Semestre semestre : semestreList) {
+            for (TurmaMaterias turmaMaterias : student.getTurma().getTurmaMaterias()) {
+                Boletim boletim = new Boletim();
+
+                boletim.setStudent(student);
+                boletim.setDisciplina(turmaMaterias.getDisciplina());
+                boletim.setSemestre(semestre);
+
+                boletimList.add(save(BoletimDTO.of(boletim)));
+            }
+        }
     }
 }

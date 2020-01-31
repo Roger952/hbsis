@@ -20,7 +20,7 @@ public class AtividadeRest {
     }
 
     @PostMapping
-    private AtividadeDTO save(@RequestBody AtividadeDTO atividadeDTO) {
+    public AtividadeDTO save(@RequestBody AtividadeDTO atividadeDTO) {
         LOGGER.info("Enviando requisição para salvar as aitividades inseridas");
         return atividadeService.save(atividadeDTO);
     }

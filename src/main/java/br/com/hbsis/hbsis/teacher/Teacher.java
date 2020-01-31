@@ -6,6 +6,7 @@ import br.com.hbsis.hbsis.utils.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "professor")
 public class Teacher extends AbstractEntity {
@@ -123,5 +124,27 @@ public class Teacher extends AbstractEntity {
                 ", cpf='" + cpf + '\'' +
                 ", disciplinas=" + disciplinas +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Teacher)) return false;
+        if (!super.equals(o)) return false;
+        Teacher teacher = (Teacher) o;
+        return instituicao.equals(teacher.instituicao) &&
+                nomeProfessor.equals(teacher.nomeProfessor) &&
+                sex.equals(teacher.sex) &&
+                age.equals(teacher.age) &&
+                telephone.equals(teacher.telephone) &&
+                address.equals(teacher.address) &&
+                email.equals(teacher.email) &&
+                cpf.equals(teacher.cpf) &&
+                disciplinas.equals(teacher.disciplinas);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), instituicao, nomeProfessor, sex, age, telephone, address, email, cpf, disciplinas);
     }
 }
