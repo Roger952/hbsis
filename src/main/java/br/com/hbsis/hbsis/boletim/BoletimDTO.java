@@ -8,9 +8,6 @@ public class BoletimDTO {
     private Long student;
     private Long semestre;
 
-    public BoletimDTO() {
-    }
-
     public BoletimDTO(Long id, Double mediaFinal, Long disciplina, Long student, Long semestre) {
         this.id = id;
         this.mediaFinal = mediaFinal;

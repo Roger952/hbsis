@@ -1,21 +1,16 @@
 package br.com.hbsis.hbsis.disciplina;
 
-import br.com.hbsis.hbsis.diciplina_professor.DisciplinaProfessor;
 import br.com.hbsis.hbsis.utils.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "discipilna")
 public class Disciplina extends AbstractEntity {
 
     @Column(name = "nome_Disciplina", length = 100, nullable = false, unique = true)
     private String nameDisciplina;
-
-    @OneToMany(mappedBy = "disciplina")
-    private List<DisciplinaProfessor> disciplinaProfessors;
 
     public Disciplina() {
     }
@@ -37,19 +32,25 @@ public class Disciplina extends AbstractEntity {
         this.nameDisciplina = nameDisciplina;
     }
 
-    public List<DisciplinaProfessor> getDisciplinaProfessors() {
-        return disciplinaProfessors;
-    }
-
-    public void setDisciplinaProfessors(List<DisciplinaProfessor> disciplinaProfessors) {
-        this.disciplinaProfessors = disciplinaProfessors;
-    }
 
     @Override
     public String toString() {
         return "Disciplina{" +
                 "nameDisciplina='" + nameDisciplina + '\'' +
-                ", disciplinaProfessors=" + disciplinaProfessors +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Disciplina)) return false;
+        if (!super.equals(o)) return false;
+        Disciplina that = (Disciplina) o;
+        return Objects.equals(nameDisciplina, that.nameDisciplina);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), nameDisciplina);
     }
 }

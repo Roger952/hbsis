@@ -2,12 +2,14 @@ package br.com.hbsis.hbsis.boletim;
 
 import br.com.hbsis.hbsis.atividade.Atividade;
 import br.com.hbsis.hbsis.disciplina.DisciplinaService;
+import br.com.hbsis.hbsis.semestre.Semestre;
 import br.com.hbsis.hbsis.semestre.SemestreService;
 import br.com.hbsis.hbsis.student.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -106,5 +108,19 @@ public class BoletimService {
         }
 
         return boletim;
+    }
+
+    public List<BoletimDTO> findByStudentAndYear(Long idStudent, Long idYear) {
+
+        List<BoletimDTO> boletimListDTO = new ArrayList<>();
+
+        for (Semestre semestre : semestreService.findByYearId(idYear)) {
+
+            for (Boletim boletim : iBoletimRepository.findByStudentAndSemestre(studentService.findById(idStudent), semestre)) {
+                boletimListDTO.add(BoletimDTO.of(boletim));
+            }
+        }
+
+        return boletimListDTO;
     }
 }
