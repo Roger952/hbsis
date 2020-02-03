@@ -5,7 +5,6 @@ import br.com.hbsis.hbsis.utils.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,8 +14,6 @@ public class Year extends AbstractEntity {
     @Column(name = "nome_ano", nullable = false, unique = true, length = 50)
     private String nameYear;
 
-    @OneToMany(mappedBy = "year")
-    private List<Semestre> semestres;
 
     public String getNameYear() {
         return nameYear;
@@ -26,34 +23,24 @@ public class Year extends AbstractEntity {
         this.nameYear = nameYear;
     }
 
-    public List<Semestre> getSemestres() {
-        return semestres;
-    }
-
-    public void setSemestres(List<Semestre> semestres) {
-        this.semestres = semestres;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Year)) return false;
         if (!super.equals(o)) return false;
         Year year = (Year) o;
-        return nameYear.equals(year.nameYear) &&
-                semestres.equals(year.semestres);
+        return nameYear.equals(year.nameYear);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), nameYear, semestres);
+        return Objects.hash(super.hashCode(), nameYear);
     }
 
     @Override
     public String toString() {
         return "Year{" +
                 "nameYear='" + nameYear + '\'' +
-                ", semestres=" + semestres +
                 '}';
     }
 }

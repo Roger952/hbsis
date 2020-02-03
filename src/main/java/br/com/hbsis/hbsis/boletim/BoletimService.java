@@ -2,6 +2,7 @@ package br.com.hbsis.hbsis.boletim;
 
 import br.com.hbsis.hbsis.atividade.Atividade;
 import br.com.hbsis.hbsis.disciplina.DisciplinaService;
+import br.com.hbsis.hbsis.modeloboletim.ModeloBoletimService;
 import br.com.hbsis.hbsis.semestre.Semestre;
 import br.com.hbsis.hbsis.semestre.SemestreService;
 import br.com.hbsis.hbsis.student.Student;
@@ -25,13 +26,15 @@ public class BoletimService {
     private final SemestreService semestreService;
     private final StudentService studentService;
     private final DisciplinaService disciplinaService;
+    private final ModeloBoletimService modeloBoletimService;
 
 
-    public BoletimService(IBoletimRepository iBoletimRepository, SemestreService semestreService, StudentService studentService, DisciplinaService disciplinaService) {
+    public BoletimService(IBoletimRepository iBoletimRepository, SemestreService semestreService, StudentService studentService, DisciplinaService disciplinaService, ModeloBoletimService modeloBoletimService) {
         this.iBoletimRepository = iBoletimRepository;
         this.semestreService = semestreService;
         this.studentService = studentService;
         this.disciplinaService = disciplinaService;
+        this.modeloBoletimService = modeloBoletimService;
     }
 
     public BoletimDTO save(BoletimDTO boletimDTO) {
@@ -96,7 +99,9 @@ public class BoletimService {
 
             Boletim boletim = boletimOptional.get();
 
-            iBoletimRepository.save(updateMedia(boletim, boletim.getAtividadeSet()));
+            boletim = iBoletimRepository.save(updateMedia(boletim, boletim.getAtividadeSet()));
+
+            modeloBoletimService.autoUpdateModeloBoletim(boletim);
         } else {
             LOGGER.info("Não foi encontrado um boletim com este Id");
         }
@@ -133,7 +138,6 @@ public class BoletimService {
     public void autoSaveBoletim(String year, Student student) {
 
         List<Semestre> semestreList = semestreService.findByYear(year);
-        List<BoletimDTO> boletimList = new ArrayList<>();
 
         for (Semestre semestre : semestreList) {
             for (TurmaMaterias turmaMaterias : student.getTurma().getTurmaMaterias()) {
@@ -143,7 +147,9 @@ public class BoletimService {
                 boletim.setDisciplina(turmaMaterias.getDisciplina());
                 boletim.setSemestre(semestre);
 
-                boletimList.add(save(BoletimDTO.of(boletim)));
+                modeloBoletimService.autoSaveModeloBoletim(turmaMaterias, semestre, student);
+
+                save(BoletimDTO.of(boletim));
             }
         }
     }

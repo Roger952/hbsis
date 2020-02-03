@@ -58,7 +58,7 @@ public class TurmaService {
         return new Turma(
                 turmaDTO.getNameTurma(),
                 turmaDTO.getAmountOfStudents(),
-                serieService.findById(turmaDTO.getIdSerie()),
+                serieService.findByCodSerie(turmaDTO.getIdSerie()),
                 instituicaoService.findById(turmaDTO.getIdInstituicao())
         );
     }

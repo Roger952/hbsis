@@ -1,6 +1,3 @@
-ALTER TABLE semestre
-    DROP CK__semestre__ano__5FD33367;
-
 DROP INDEX semestre.ix_semestre_nome_and_ano;
 
 ALTER TABLE semestre

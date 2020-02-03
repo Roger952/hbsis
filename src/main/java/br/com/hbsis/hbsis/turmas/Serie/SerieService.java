@@ -13,8 +13,8 @@ public class SerieService {
         this.iSerieRepository = iSerieRepository;
     }
 
-    public Serie findById(Long id) {
-        Optional<Serie> serieOptional = iSerieRepository.findById(id);
+    public Serie findByCodSerie(Long numberSerie) {
+        Optional<Serie> serieOptional = iSerieRepository.findByNumberSerie(numberSerie);
 
         if (serieOptional.isPresent()) {
             return serieOptional.get();
