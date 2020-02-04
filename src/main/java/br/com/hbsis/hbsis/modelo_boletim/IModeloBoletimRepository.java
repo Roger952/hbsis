@@ -1,4 +1,4 @@
-package br.com.hbsis.hbsis.modeloboletim;
+package br.com.hbsis.hbsis.modelo_boletim;
 
 import br.com.hbsis.hbsis.student.Student;
 import br.com.hbsis.hbsis.year.Year;

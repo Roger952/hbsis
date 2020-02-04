@@ -2,7 +2,7 @@ package br.com.hbsis.hbsis.boletim;
 
 import br.com.hbsis.hbsis.atividade.Atividade;
 import br.com.hbsis.hbsis.disciplina.DisciplinaService;
-import br.com.hbsis.hbsis.modeloboletim.ModeloBoletimService;
+import br.com.hbsis.hbsis.modelo_boletim.ModeloBoletimService;
 import br.com.hbsis.hbsis.semestre.Semestre;
 import br.com.hbsis.hbsis.semestre.SemestreService;
 import br.com.hbsis.hbsis.student.Student;

@@ -1,4 +1,4 @@
-package br.com.hbsis.hbsis.modeloboletim;
+package br.com.hbsis.hbsis.modelo_boletim;
 
 import br.com.hbsis.hbsis.student.Student;
 import br.com.hbsis.hbsis.utils.AbstractEntity;
@@ -25,6 +25,18 @@ public class ModeloBoletim extends AbstractEntity {
     @Column(name = "media_terceiro_semestre", length = 50, nullable = false)
     private String mediaerceiroSemestre;
 
+    @Column(name = "nome_estudante", nullable = false, length = 100)
+    private String nameStudent;
+
+    @Column(name = "nome_turma", nullable = false, length = 50)
+    private String nameTurma;
+
+    @Column(name = "nome_ano", nullable = false, length = 4)
+    private String nameYear;
+
+    @Column(name = "nome_escola", nullable = false, length = 100)
+    private String nameSchool;
+
     @ManyToOne
     @JoinColumn(name = "ano", referencedColumnName = "id")
     private Year year;
@@ -36,11 +48,15 @@ public class ModeloBoletim extends AbstractEntity {
     public ModeloBoletim() {
     }
 
-    public ModeloBoletim(String nameDisciplina, String mediaPrimeiroSemestre, String mediaSegundoSemestre, String mediaerceiroSemestre, Year year, Student student) {
+    public ModeloBoletim(String nameDisciplina, String mediaPrimeiroSemestre, String mediaSegundoSemestre, String mediaerceiroSemestre, String nameStudent, String nameTurma, String nameYear, String nameSchool, Year year, Student student) {
         this.nameDisciplina = nameDisciplina;
         this.mediaPrimeiroSemestre = mediaPrimeiroSemestre;
         this.mediaSegundoSemestre = mediaSegundoSemestre;
         this.mediaerceiroSemestre = mediaerceiroSemestre;
+        this.nameStudent = nameStudent;
+        this.nameTurma = nameTurma;
+        this.nameYear = nameYear;
+        this.nameSchool = nameSchool;
         this.year = year;
         this.student = student;
     }
@@ -93,23 +109,59 @@ public class ModeloBoletim extends AbstractEntity {
         this.student = student;
     }
 
+    public String getNameStudent() {
+        return nameStudent;
+    }
+
+    public void setNameStudent(String nameStudent) {
+        this.nameStudent = nameStudent;
+    }
+
+    public String getNameTurma() {
+        return nameTurma;
+    }
+
+    public void setNameTurma(String nameTurma) {
+        this.nameTurma = nameTurma;
+    }
+
+    public String getNameYear() {
+        return nameYear;
+    }
+
+    public void setNameYear(String nameYear) {
+        this.nameYear = nameYear;
+    }
+
+    public String getNameSchool() {
+        return nameSchool;
+    }
+
+    public void setNameSchool(String nameSchool) {
+        this.nameSchool = nameSchool;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ModeloBoletim)) return false;
         if (!super.equals(o)) return false;
         ModeloBoletim that = (ModeloBoletim) o;
-        return nameDisciplina.equals(that.nameDisciplina) &&
-                mediaPrimeiroSemestre.equals(that.mediaPrimeiroSemestre) &&
-                mediaSegundoSemestre.equals(that.mediaSegundoSemestre) &&
-                mediaerceiroSemestre.equals(that.mediaerceiroSemestre) &&
-                year.equals(that.year) &&
-                student.equals(that.student);
+        return Objects.equals(nameDisciplina, that.nameDisciplina) &&
+                Objects.equals(mediaPrimeiroSemestre, that.mediaPrimeiroSemestre) &&
+                Objects.equals(mediaSegundoSemestre, that.mediaSegundoSemestre) &&
+                Objects.equals(mediaerceiroSemestre, that.mediaerceiroSemestre) &&
+                Objects.equals(nameStudent, that.nameStudent) &&
+                Objects.equals(nameTurma, that.nameTurma) &&
+                Objects.equals(nameYear, that.nameYear) &&
+                Objects.equals(nameSchool, that.nameSchool) &&
+                Objects.equals(year, that.year) &&
+                Objects.equals(student, that.student);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), nameDisciplina, mediaPrimeiroSemestre, mediaSegundoSemestre, mediaerceiroSemestre, year, student);
+        return Objects.hash(super.hashCode(), nameDisciplina, mediaPrimeiroSemestre, mediaSegundoSemestre, mediaerceiroSemestre, nameStudent, nameTurma, nameYear, nameSchool, year, student);
     }
 
     @Override
@@ -119,6 +171,10 @@ public class ModeloBoletim extends AbstractEntity {
                 ", mediaPrimeiroSemestre='" + mediaPrimeiroSemestre + '\'' +
                 ", mediaSegundoSemestre='" + mediaSegundoSemestre + '\'' +
                 ", mediaerceiroSemestre='" + mediaerceiroSemestre + '\'' +
+                ", nameStudent='" + nameStudent + '\'' +
+                ", nameTurma='" + nameTurma + '\'' +
+                ", nameYear='" + nameYear + '\'' +
+                ", nameSchool='" + nameSchool + '\'' +
                 ", year=" + year +
                 ", student=" + student +
                 '}';
