@@ -4,6 +4,7 @@ import br.com.hbsis.hbsis.utils.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.util.Objects;
 
 @Entity(name = "instituicao")
 public class Instituicao extends AbstractEntity {
@@ -28,6 +29,29 @@ public class Instituicao extends AbstractEntity {
 
     public void setTypeInstituicao(String typeInstituicao) {
         this.typeInstituicao = typeInstituicao;
+    }
+
+    public Instituicao() {
+    }
+
+    public Instituicao(String nameInstituicao, String typeInstituicao) {
+        this.nameInstituicao = nameInstituicao;
+        this.typeInstituicao = typeInstituicao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Instituicao)) return false;
+        if (!super.equals(o)) return false;
+        Instituicao that = (Instituicao) o;
+        return Objects.equals(nameInstituicao, that.nameInstituicao) &&
+                Objects.equals(typeInstituicao, that.typeInstituicao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), nameInstituicao, typeInstituicao);
     }
 
     @Override

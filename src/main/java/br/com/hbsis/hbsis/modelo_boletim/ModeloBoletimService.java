@@ -90,7 +90,8 @@ public class ModeloBoletimService {
     }
 
     public void autoSaveModeloBoletim(TurmaMaterias turmaMaterias, Semestre semestre, Student student) {
-        Optional<ModeloBoletim> modeloBoletimOptional = iModeloBoletimRepository.findByNameDisciplinaAndYearAndStudent(turmaMaterias.getDisciplina().getNameDisciplina(), semestre.getYear(), student);
+        Optional<ModeloBoletim> modeloBoletimOptional = iModeloBoletimRepository.findByNameDisciplinaAndYearAndStudent
+                (turmaMaterias.getDisciplina().getNameDisciplina(), semestre.getYear(), student);
         Calendar calendar = new GregorianCalendar();
         if (!modeloBoletimOptional.isPresent()) {
             ModeloBoletimDTO modeloBoletimDTO = new ModeloBoletimDTO(

@@ -2,15 +2,13 @@ package br.com.hbsis.hbsis.intituicao;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/schools")
+@CrossOrigin(origins = "*")
 public class InstituicaoRest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InstituicaoRest.class);
@@ -40,5 +38,11 @@ public class InstituicaoRest {
     public List<Instituicao> findByContainingNameInstituicao(@PathVariable(name = "nameInstituicao") String nameInstituicao) {
 
         return instituicaoService.findByNameInstituicaoContaining(nameInstituicao);
+    }
+
+    @PostMapping("/save")
+    public InstituicaoDTO save(@RequestBody InstituicaoDTO instituicaoDTO){
+        LOGGER.info("Salvando a instituição");
+        return instituicaoService.save(instituicaoDTO);
     }
 }

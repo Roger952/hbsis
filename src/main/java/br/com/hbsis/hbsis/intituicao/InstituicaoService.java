@@ -39,4 +39,22 @@ public class InstituicaoService {
     public List<Instituicao> findByNameInstituicaoContaining(String nameInstituicao) {
         return iIntituicaoRepository.findByNameInstituicaoContaining(nameInstituicao);
     }
+
+    public InstituicaoDTO save(InstituicaoDTO instituicaoDTO) {
+
+        LOGGER.info("Salvando a Instituição");
+
+        Instituicao instituicao = of(instituicaoDTO);
+
+        instituicao = iIntituicaoRepository.save(instituicao);
+
+        return InstituicaoDTO.of(instituicao);
+    }
+
+    private Instituicao of(InstituicaoDTO instituicaoDTO) {
+        return new Instituicao(
+                instituicaoDTO.getNameInstituicao(),
+                instituicaoDTO.getTypeInstituicao()
+        );
+    }
 }
