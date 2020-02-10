@@ -7,10 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -100,4 +97,11 @@ public class StudentService {
         throw new IllegalArgumentException("Não foi possivel encontrar um estudante com ete id");
     }
 
+    public List<StudentDTO> findAll(){
+        List<StudentDTO> studentDTOS = new ArrayList<>();
+        for (Student student: iStudentRepository.findAll()){
+            studentDTOS.add(StudentDTO.of(student));
+        }
+        return studentDTOS;
+    }
 }

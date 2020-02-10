@@ -126,11 +126,9 @@ public class ModeloBoletimService {
         return modeloBoletimDTOS;
     }
 
-    public String exportReport(String reportFormat, Long idStudent) throws FileNotFoundException, JRException {
+    public byte[] exportReport(Long idStudent) throws FileNotFoundException, JRException {
 
         List<ModeloBoletimDTO> boletimDTOS = findByStudent(idStudent);
-
-        String path = "C:\\Users\\roger.guillermo\\Documents\\Model Expotados";
 
         File file = ResourceUtils.getFile("classpath:ExportBoletim.jrxml");
 
@@ -144,13 +142,6 @@ public class ModeloBoletimService {
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, dataSource);
 
-        if (reportFormat.equalsIgnoreCase("html")) {
-            JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "\\boletim.html");
-        }
-        if (reportFormat.equalsIgnoreCase("pdf")) {
-            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\boletim.pdf");
-        }
-
-        return "Boletim extraido no local : " + path;
+        return JasperExportManager.exportReportToPdf(jasperPrint);
     }
 }

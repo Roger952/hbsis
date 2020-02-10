@@ -10,7 +10,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("student")
+@RequestMapping("/student")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class StudentRest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StudentRest.class);
@@ -39,5 +40,10 @@ public class StudentRest {
     public ResponseEntity<Student> findByRegister(@PathVariable(name = "register") String register) {
 
         return new ResponseEntity<>(studentService.findByRegister(register), HttpStatus.OK);
+    }
+
+    @GetMapping("/findAll")
+    public List<StudentDTO> findAll() {
+        return studentService.findAll();
     }
 }
