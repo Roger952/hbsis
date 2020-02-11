@@ -45,4 +45,9 @@ public class InstituicaoRest {
         LOGGER.info("Salvando a instituição");
         return instituicaoService.save(instituicaoDTO);
     }
+
+    @DeleteMapping("/deleteById/{id}")
+    public void delete(@PathVariable(name = "id") Long id){
+        instituicaoService.deleteById(id);
+    }
 }

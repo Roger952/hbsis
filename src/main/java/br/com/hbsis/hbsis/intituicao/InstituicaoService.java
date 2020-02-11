@@ -57,4 +57,15 @@ public class InstituicaoService {
                 instituicaoDTO.getTypeInstituicao()
         );
     }
+
+    public  void deleteById(Long id){
+
+        Optional<Instituicao> instituicaoOptional = iIntituicaoRepository.findById(id);
+
+        if (instituicaoOptional.isPresent()){
+            iIntituicaoRepository.deleteById(id);
+        }else {
+            throw new IllegalArgumentException("Não foi encontrado nenhuma escola com este nome");
+        }
+    }
 }
